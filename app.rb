@@ -1,7 +1,6 @@
 require 'chronic' # for complex date parsing
-require 'colorize'
-# Find a third gem of your choice and add it to your project
-require 'date'
+require 'colorize'# for priority symbols
+
 require_relative "lib/listable"
 require_relative "lib/errors"
 require_relative "lib/udacilist"
@@ -44,4 +43,7 @@ list.all
 
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
-# new_list.filter("event")
+ new_list.filter("todo")
+ new_list.filter("event")
+ new_list.filter("link")
+ new_list.filter("BLANK")

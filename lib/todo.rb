@@ -9,14 +9,14 @@ class TodoItem
   end
 
   def format_priority
-    value = " ⇧" if @priority == "high"
-    value = " ⇨" if @priority == "medium"
-    value = " ⇩" if @priority == "low"
+    value = " ⇧".colorize(:red) if @priority == "high"
+    value = " ⇨".colorize(:yellow) if @priority == "medium"
+    value = " ⇩".colorize(:green) if @priority == "low"
     value = "" if !@priority
     return value
   end
 
   def details
-    format_description(@description) + "due: #{format_date(due:@due)}" +  format_priority
+    format_description(@description) + "due: ".colorize(:red) + format_date(due:@due) +  format_priority
   end
 end
