@@ -7,19 +7,22 @@ class UdaciList
   end
 
   def add(type, description, options={})
+    puts "Adding to Udacilist"
     type = type.downcase
     valid_types = "todo event link"
     valid_priorities = "low medium high"
-    if options[:priority] && !valid_priorities[options[:priority]]
-        raise UdaciListErrors::InvalidPriorityValue "InvalidPriorityValue: priority values must be 'low', 'medium' or 'high'."
-    end
+
     if !valid_types[type]
       raise UdaciListErrors::InvalidItemType, "InvalidItemType: type must be 'todo', 'event' or 'link'"
-    else
-      @items.push TodoItem.new(description, options) if type == "todo"
-      @items.push EventItem.new(description, options) if type == "event"
-      @items.push LinkItem.new(description, options) if type == "link"
     end
+    if options[:priority] && !valid_priorities[options[:priority]]
+      raise UdaciListErrors::InvalidPriorityValue "InvalidPriorityValue: priority values must be 'low', 'medium' or 'high'."
+    end
+
+    @items.push TodoItem.new(description, options) if type == "todo"
+    @items.push EventItem.new(description, options) if type == "event"
+    @items.push LinkItem.new(description, options) if type == "link"
+
   end
 
   def delete(index)
