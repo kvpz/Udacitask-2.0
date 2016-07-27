@@ -5,8 +5,8 @@ class TodoItem
 
   def initialize(description, options={})
     @description = description
-    @due = format_date(options)
-    #@due = options[:due] ? Chronic.parse(options[:due]) : options[:due]
+    #@due = format_date(options)
+    @due = options[:due] ? Chronic.parse(options[:due]) : options[:due]
     @priority = options[:priority]
   end
 
@@ -19,8 +19,6 @@ class TodoItem
   end
 
   def details
-    format_description(@description) + "due: " +
-    @due +
-    format_priority
+    format_description(@description) + (@due ? "due: #{format_date(due:@due)}" : "") +   format_priority # @due originally format_date
   end
 end
