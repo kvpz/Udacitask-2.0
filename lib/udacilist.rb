@@ -57,7 +57,7 @@ class UdaciList
     end
 
     if arr.empty?
-      puts "There is no such type in the list."
+      puts "Item type #{item_type} is not on #{self.title}."
     else
       all(arr) # display list of item type
     end
