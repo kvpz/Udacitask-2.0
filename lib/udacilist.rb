@@ -5,15 +5,23 @@ class UdaciList
     @title = options[:title]
     @items = []
   end
+
   def add(type, description, options={})
     type = type.downcase
-    @items.push TodoItem.new(description, options) if type == "todo"
-    @items.push EventItem.new(description, options) if type == "event"
-    @items.push LinkItem.new(description, options) if type == "link"
+    valid_types = "todo event link"
+    if !valid_types[type]
+      raise UdaciListErrors::InvalidItemType, "InvalidItemType: #{type} must be 'todo', 'event' or 'link'"
+    else
+      @items.push TodoItem.new(description, options) if type == "todo"
+      @items.push EventItem.new(description, options) if type == "event"
+      @items.push LinkItem.new(description, options) if type == "link"
+    end
   end
+
   def delete(index)
     @items.delete_at(index - 1)
   end
+
   def all
     puts "-" * @title.length
     puts @title
