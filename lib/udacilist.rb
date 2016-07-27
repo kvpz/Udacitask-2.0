@@ -2,7 +2,7 @@ class UdaciList
   attr_reader :title, :items
 
   def initialize(options={})
-    @title = options[:title]
+    @title = options[:title] || "Untitled List"
     @items = []
   end
 
@@ -10,10 +10,8 @@ class UdaciList
     type = type.downcase
     valid_types = "todo event link"
     valid_priorities = "low medium high"
-    if (priority = options[:priority])
-      if !valid_priorities[priority]
+    if options[:priority] && !valid_priorities[options[:priority]]
         raise UdaciListErrors::InvalidPriorityValue "InvalidPriorityValue: priority values must be 'low', 'medium' or 'high'."
-      end
     end
     if !valid_types[type]
       raise UdaciListErrors::InvalidItemType, "InvalidItemType: type must be 'todo', 'event' or 'link'"
