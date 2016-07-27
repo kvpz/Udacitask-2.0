@@ -1,3 +1,11 @@
 module UdaciListErrors
-  # Error classes go here
+  class InvalidItemType < StandardError
+  end
+
+  class IndexExceedsListSize
+  end
+
+  class InvalidPriorityValue
+  end
+
 end
