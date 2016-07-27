@@ -1,4 +1,3 @@
-require_relative '../lib/listable'
 class TodoItem
   include Listable
   attr_reader :description, :due, :priority
@@ -18,6 +17,6 @@ class TodoItem
   end
 
   def details
-    format_description(@description) + (@due ? "due: #{format_date(due:@due)}" : "") +   format_priority # @due originally format_date
+    format_description(@description) + "due: #{format_date(due:@due)}" +  format_priority
   end
 end

@@ -7,7 +7,6 @@ class UdaciList
   end
 
   def add(type, description, options={})
-    puts "Adding to Udacilist"
     type = type.downcase
     valid_types = "todo event link"
     valid_priorities = "low medium high"
