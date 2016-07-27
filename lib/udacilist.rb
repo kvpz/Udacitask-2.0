@@ -9,8 +9,14 @@ class UdaciList
   def add(type, description, options={})
     type = type.downcase
     valid_types = "todo event link"
+    valid_priorities = "low medium high"
+    if (priority = options[:priority])
+      if !valid_priorities[priority]
+        raise UdaciListErrors::InvalidPriorityValue "InvalidPriorityValue: priority values must be 'low', 'medium' or 'high'."
+      end
+    end
     if !valid_types[type]
-      raise UdaciListErrors::InvalidItemType, "InvalidItemType: #{type} must be 'todo', 'event' or 'link'"
+      raise UdaciListErrors::InvalidItemType, "InvalidItemType: type must be 'todo', 'event' or 'link'"
     else
       @items.push TodoItem.new(description, options) if type == "todo"
       @items.push EventItem.new(description, options) if type == "event"
@@ -20,7 +26,7 @@ class UdaciList
 
   def delete(index)
     if index > items.size
-      raise UdaciListErrors::IndexExceedsListSize, "IndexExceedsListSize: #{index} exceeds array 'items' size."
+      raise UdaciListErrors::IndexExceedsListSize, "IndexExceedsListSize: '#{index}' exceeds array 'items' size."
     else
       @items.delete_at(index - 1)
     end
