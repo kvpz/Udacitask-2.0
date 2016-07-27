@@ -42,18 +42,12 @@ class UdaciList
   end
 
   def filter(item_type)
-    class_name = String.new
-    class_name = "TodoItem" if item_type == "todo"
-    class_name = "EventItem" if item_type == "event"
-    class_name = "LinkItem" if item_type == "link"
+    list_types = {"todo" => TodoItem, "event" => EventItem, "link" => LinkItem}
+    class_name = list_types[item_type]
 
-    arr = Array.new
+    arr = []
     if @@valid_event_types[item_type]
-      @items.each do |i|
-        if i.class.to_s == class_name
-          arr << i
-        end
-      end
+      arr = @items.find_all{|i| i.class.equal? class_name }
     end
 
     if arr.empty?
