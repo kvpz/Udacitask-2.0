@@ -19,7 +19,11 @@ class UdaciList
   end
 
   def delete(index)
-    @items.delete_at(index - 1)
+    if index > items.size
+      raise UdaciListErrors::IndexExceedsListSize, "IndexExceedsListSize: #{index} exceeds array 'items' size."
+    else
+      @items.delete_at(index - 1)
+    end
   end
 
   def all
