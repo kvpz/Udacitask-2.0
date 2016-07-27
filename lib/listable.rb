@@ -8,10 +8,13 @@ module Listable
   def format_date(dates={})
     if !dates.empty?
       if(dates.has_key?(:due) && dates[:due]) # TodoItem date
-        return Date.parse(dates[:due].to_s).to_s
-        #return Date.parse("#{Chronic.parse(dates[:due])}").to_s
-      elsif(dates)
-        return
+        return dates[:due].strftime('%D')
+      else
+        d = dates.reject{|k,v| v == nil}
+        return "#{d[:start_date]} --> #{d[:end_date]}" if d.size == 2
+        return "#{d[:start_date]}" if d[:start_date]
+        return "#{d[:end_date]}" if d[:end_date]
+        return ""
       end
     end
   end
