@@ -21,11 +21,6 @@ module Listable
 
   end
 
-
-
-
-
-
 end
 
 =begin
