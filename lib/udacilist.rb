@@ -9,7 +9,7 @@ class UdaciList
   def add(type, description, options={})
     type = type.downcase
     @@valid_event_types = "todo event link".freeze
-    @@valid_priorities = "low medium high".freeze
+    @@valid_priorities = "low medium high" # only applies to TodoList items
 
     if !@@valid_event_types[type]
       raise UdaciListErrors::InvalidItemType, "InvalidItemType: type must be 'todo', 'event' or 'link'"
@@ -31,19 +31,36 @@ class UdaciList
     end
   end
 
-  def all
+  # displays the entire list
+  def all(items_=@items)
     puts "-".colorize(:cyan) * @title.length
     puts @title.colorize(:cyan)
     puts "-".colorize(:cyan) * @title.length
-    @items.each_with_index do |item, position|
+    items_.each_with_index do |item, position|
       puts "#{position + 1}) #{item.details}"
     end
   end
 
-  def filter(event)
-    if @@valid_event_types[event]
+  def filter(item_type)
+    class_name = String.new
+    class_name = "TodoItem" if item_type == "todo"
+    class_name = "EventItem" if item_type == "event"
+    class_name = "LinkItem" if item_type == "link"
 
+    arr = Array.new
+    if @@valid_event_types[item_type]
+      @items.each do |i|
+        if i.class.to_s == class_name
+          arr << i
+        end
+      end
     end
 
+    if arr.empty?
+      puts "There is no such type in the list."
+    else
+      all(arr) # display list of item type
+    end
   end
-end
+
+end # class UdaciList

@@ -44,6 +44,6 @@ list.all
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
  new_list.filter("todo")
- new_list.filter("event")
- new_list.filter("link")
- new_list.filter("BLANK")
+# new_list.filter("event")
+# new_list.filter("link")
+# new_list.filter("BLANK")
