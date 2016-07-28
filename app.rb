@@ -45,6 +45,6 @@ list.all
 # ------------------------
  new_list.filter("todo")
  new_list.filter("BLANK")
-
-  new_list.prioritize_todo
+  new_list.sort_by_type
+  new_list.show_prioritized_todo
   new_list.all

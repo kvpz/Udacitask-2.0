@@ -11,4 +11,5 @@ class EventItem
   def details
     format_description(@description) + "event dates: ".colorize(:blue) + format_date(start_date:@start_date, end_date:@end_date)
   end
+
 end

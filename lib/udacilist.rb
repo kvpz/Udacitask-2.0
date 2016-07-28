@@ -53,12 +53,17 @@ class UdaciList
     arr.empty? ? (puts "Item type #{item_type} is not on #{self.title}.") : all(arr) # display list of item type
   end
 
+  def sort_by_type
+    @items.sort_by!{|i| i.class.to_s}
+  end
 
-  def prioritize_todo
+  def show_prioritized_todo
     $stdout = StringIO.new # in order to redirect output from filter()
     todo_items = filter("todo") # implicitly gets an array of TodoItem elements
     $stdout = STDOUT
     todo_items.sort!{|a,b|  b <=> a}
+    all(todo_items)
   end
+
 
 end # class UdaciList

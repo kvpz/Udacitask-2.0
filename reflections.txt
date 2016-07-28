@@ -6,7 +6,7 @@
   a) I implemented TodoItem::prioritize_todo() which orders an array of TodoItems. To make it
   work, I included Comparable in TodoItem and overrode the comparison method.
 
-  b)
+  b) UdaciList::sort_by_type which sorts the list alphabetically by item types.
 
   c) I added a default argument to UdaciList::all() so that I can reuse
    that function to print the list of a type of item in UdaciList::filter().
