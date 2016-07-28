@@ -2,17 +2,31 @@
 # -------------------------------------------------------
 1. What is the gem of your choice and how did you use it?
 2. Describe the 2 features you added to the project.
-  a)
+
+  a) I implemented TodoItem::prioritize_todo() which orders an array of TodoItems. To make it
+  work, I included Comparable in TodoItem and overrode the comparison method.
+
   b)
+
+  c) I added a default argument to UdaciList::all() so that I can reuse
+   that function to print the list of a type of item in UdaciList::filter().
 
 # REFLECTIONS
 # -------------------------------------------------------
 1. How long did you spend working on this project?
+    30 hours
+
 2. What was the most rewarding challenge you conquered?
+
+    Learning how IO streams working in Ruby (kind of). Also I've learned to just stick
+    with one idea at a time. Any idea would be a learning experience anyway. DECIDING on
+    a feature to implement is the most difficult part for me. It helps to just think
+    about what a user of the program would want.
+
 3. What two additional features did you build? Why?
+
+
+
 4. Where do you still have room to grow?
 
-
-# Ideas as I read through the prep
-# ---------------------------------
-In a module store: format_*
+    UI/UX design.

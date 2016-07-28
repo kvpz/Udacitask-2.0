@@ -34,7 +34,7 @@ list.all
 # SHOULD RETURN ERROR MESSAGES
 # ----------------------------
 # new_list.add("image", "http://ruby-doc.org") # Throws InvalidItemType error
-# new_list.delete(9) # Throws an IndexExceedsListSize error
+# new_list.delete(9) # Throws an IndexExceedsListSize error,
 # new_list.add("todo", "Hack some portals", priority: "super high") # throws an InvalidPriorityValue error
 
 # DISPLAY UNTITLED LIST
@@ -44,6 +44,7 @@ list.all
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
  new_list.filter("todo")
- new_list.filter("event")
- new_list.filter("link")
  new_list.filter("BLANK")
+
+  new_list.prioritize_todo
+  new_list.all

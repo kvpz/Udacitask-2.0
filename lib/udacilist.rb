@@ -42,19 +42,23 @@ class UdaciList
   end
 
   def filter(item_type)
-    list_types = {"todo" => TodoItem, "event" => EventItem, "link" => LinkItem}
-    class_name = list_types[item_type]
+    types = {"todo" => TodoItem, "event" => EventItem, "link" => LinkItem}
+    class_name = types[item_type.downcase]
 
     arr = []
     if @@valid_event_types[item_type]
       arr = @items.find_all{|i| i.class.equal? class_name }
     end
 
-    if arr.empty?
-      puts "Item type #{item_type} is not on #{self.title}."
-    else
-      all(arr) # display list of item type
-    end
+    arr.empty? ? (puts "Item type #{item_type} is not on #{self.title}.") : all(arr) # display list of item type
+  end
+
+
+  def prioritize_todo
+    $stdout = StringIO.new # in order to redirect output from filter()
+    todo_items = filter("todo") # implicitly gets an array of TodoItem elements
+    $stdout = STDOUT
+    todo_items.sort!{|a,b|  b <=> a}
   end
 
 end # class UdaciList
