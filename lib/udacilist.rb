@@ -66,7 +66,7 @@ class UdaciList
     arr = []
     # store items of one type in arr
     if @@valid_event_types[item_type]
-      arr = @items.find_all{|i| i.class.equal? class_name }
+      arr = @items.find_all{|i| i.class.equal? class_name}
     end
     arr.empty? ? (puts "Item type #{item_type} is not on #{self.title}.") : all(arr) # display list of item type
   end

@@ -3,10 +3,7 @@
 1. What is the gem of your choice and how did you use it?
 
     - Terminal-table(1.6.0): I used it to neatly display items. The first
-      box in the table is the list's name and below it are sublist types.
-    - Colorize(0.8.1): It helps distinguish between item types.
-    - Chronic(0.10.2): A natural language date/time parser. I use it in
-      TodoItems::initialize because to store the dates in MM/DD/YY format.
+      box, the title of the table, is a list's name and below it are sublist item types.
 
 2. Describe the 2 features you added to the project.
 
@@ -14,7 +11,7 @@
   work, I included Comparable in TodoItem and overrode the comparison method.
 
   b) UdaciList::sort_by_type which sorts the list alphabetically by item types.
-
+K
   c) UdaciList::delete_by_description(desc) allows deletion by an item's description.
 
   d) UdaciList::show_prioritized_todo
@@ -35,8 +32,9 @@
     1) I added a simple method (empty?) to identify if a list is empty. This
     improves readability and is useful for testing within app.rb (in a readable way).
 
-    2) Created UdaciList::filter(item_type) to print all items of one type. This function
-     also implicitly returns an array with those items.
+    2) UdaciList::show_prioritzed_todo() took more work than it looks. I had to include
+       'Comparable' in class TodoItem and then override <=> so that the todo items could
+       be sorted based on their priority (arrow images).
 
 4. Where do you still have room to grow?
     UI/UX design.
