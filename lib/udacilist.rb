@@ -1,3 +1,5 @@
+require 'terminal-table'
+
 class UdaciList
   attr_reader :title, :items
 
@@ -9,7 +11,7 @@ class UdaciList
   def add(type, description, options={})
     type = type.downcase
     @@valid_event_types = "todo event link".freeze
-    @@valid_priorities = "low medium high" # only applies to TodoList items
+    @@valid_priorities = "low medium high".freeze # only applies to TodoList items
 
     if !@@valid_event_types[type]
       raise UdaciListErrors::InvalidItemType, "InvalidItemType: type must be 'todo', 'event' or 'link'"
@@ -31,25 +33,41 @@ class UdaciList
     end
   end
 
-  # displays the entire list
-  def all(items_=@items)
-    puts "-".colorize(:cyan) * @title.length
-    puts @title.colorize(:cyan)
-    puts "-".colorize(:cyan) * @title.length
-    items_.each_with_index do |item, position|
-      puts "#{position + 1}) #{item.details}"
+  def delete_by_description(desc)
+    desc.downcase!
+    index = self.items.find_index{|item| item.description.downcase.eql?(desc)}
+    if !index.nil?
+      self.delete(index+1)
     end
   end
 
+  # displays a list (sorted)
+  def all(items_=@items)
+    self.sort_by_type
+    table = Terminal::Table.new :title => @title.colorize(:cyan)
+    previous_item_type = nil
+    items_.each.with_index do |item, i|
+      if previous_item_type != item.class
+        table << :separator
+        table.add_row(["#{item.class}".colorize(:blue)])
+        table << :separator
+        previous_item_type = item.class
+      end
+      table << ["#{i+1}) "+ item.details]
+    end
+    puts table
+
+  end
+
+  # it displays items of one type and it returns
   def filter(item_type)
     types = {"todo" => TodoItem, "event" => EventItem, "link" => LinkItem}
     class_name = types[item_type.downcase]
-
     arr = []
+    # store items of one type in arr
     if @@valid_event_types[item_type]
       arr = @items.find_all{|i| i.class.equal? class_name }
     end
-
     arr.empty? ? (puts "Item type #{item_type} is not on #{self.title}.") : all(arr) # display list of item type
   end
 
@@ -58,11 +76,15 @@ class UdaciList
   end
 
   def show_prioritized_todo
-    $stdout = StringIO.new # in order to redirect output from filter()
-    todo_items = filter("todo") # implicitly gets an array of TodoItem elements
-    $stdout = STDOUT
-    todo_items.sort!{|a,b|  b <=> a}
-    all(todo_items)
+    todo_items = @items.find_all{|i| i.class.equal? TodoItem}
+    if !todo_items.nil?
+      todo_items.sort!{|a,b|  b <=> a}
+      all(todo_items)
+    end
+  end
+
+  def empty?
+    return items.empty?
   end
 
 

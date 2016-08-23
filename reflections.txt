@@ -1,6 +1,13 @@
 # What you added to Udacitask 2.0
 # -------------------------------------------------------
 1. What is the gem of your choice and how did you use it?
+
+    - Terminal-table(1.6.0): I used it to neatly display items. The first
+      box in the table is the list's name and below it are sublist types.
+    - Colorize(0.8.1): It helps distinguish between item types.
+    - Chronic(0.10.2): A natural language date/time parser. I use it in
+      TodoItems::initialize because to store the dates in MM/DD/YY format.
+
 2. Describe the 2 features you added to the project.
 
   a) I implemented TodoItem::prioritize_todo() which orders an array of TodoItems. To make it
@@ -8,25 +15,28 @@
 
   b) UdaciList::sort_by_type which sorts the list alphabetically by item types.
 
-  c) I added a default argument to UdaciList::all() so that I can reuse
-   that function to print the list of a type of item in UdaciList::filter().
+  c) UdaciList::delete_by_description(desc) allows deletion by an item's description.
+
+  d) UdaciList::show_prioritized_todo
 
 # REFLECTIONS
 # -------------------------------------------------------
 1. How long did you spend working on this project?
-    30 hours
+    40 hours
 
 2. What was the most rewarding challenge you conquered?
 
-    Learning how IO streams working in Ruby (kind of). Also I've learned to just stick
+    Learning how IO streams work in Ruby. I also learned to stick
     with one idea at a time. Any idea would be a learning experience anyway. DECIDING on
     a feature to implement is the most difficult part for me. It helps to just think
     about what a user of the program would want.
 
 3. What two additional features did you build? Why?
+    1) I added a simple method (empty?) to identify if a list is empty. This
+    improves readability and is useful for testing within app.rb (in a readable way).
 
-
+    2) Created UdaciList::filter(item_type) to print all items of one type. This function
+     also implicitly returns an array with those items.
 
 4. Where do you still have room to grow?
-
     UI/UX design.

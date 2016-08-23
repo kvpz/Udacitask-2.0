@@ -1,12 +1,7 @@
 require 'chronic' # for complex date parsing
 require 'colorize'# for priority symbols
-
-require_relative "lib/listable"
-require_relative "lib/errors"
-require_relative "lib/udacilist"
-require_relative "lib/todo"
-require_relative "lib/event"
-require_relative "lib/link"
+relative_path = "lib/"
+%w{listable errors udacilist todo event link}.each{|i| require_relative "#{relative_path}"+i}
 
 list = UdaciList.new(title: "Julia's Stuff")
 list.add("todo", "Buy more cat food", due: "2016-02-03", priority: "low")
@@ -16,7 +11,7 @@ list.add("event", "Birthday Party", start_date: "2016-05-08")
 list.add("event", "Vacation", start_date: "2016-05-28", end_date: "2016-05-31")
 list.add("link", "https://github.com", site_name: "GitHub Homepage")
 list.all
-list.delete(3)
+list.delete(3) # deletes third item
 list.all
 
 # SHOULD CREATE AN UNTITLED LIST AND ADD ITEMS TO IT
@@ -30,6 +25,8 @@ list.all
  new_list.add("event", "Life happens")
  new_list.add("link", "https://www.udacity.com/", site_name: "Udacity Homepage")
  new_list.add("link", "http://ruby-doc.org")
+ new_list.add("todo", "Change car oil", due: "1-13-16", priority: "high")
+ new_list.add("event", "Timmy's Birthday", start_date: "August 31")
 
 # SHOULD RETURN ERROR MESSAGES
 # ----------------------------
@@ -45,6 +42,11 @@ list.all
 # ------------------------
  new_list.filter("todo")
  new_list.filter("BLANK")
-  new_list.sort_by_type
-  new_list.show_prioritized_todo
-  new_list.all
+ new_list.sort_by_type
+ new_list.show_prioritized_todo
+ new_list.all
+
+ new_list.show_prioritized_todo
+
+ new_list.delete_by_description("TimMy's Birthday")
+ new_list.all
